@@ -27,5 +27,8 @@
   "homepage": "https://github.com/RaphaelDeLaGhetto/gebo-unoconv",
   "dependencies": {
     "q": "^1.0.1"
+  },
+  "devDependencies": {
+    "mime": "^1.2.11"
   }
 }
