@@ -8,7 +8,7 @@ A LibreOffice/unoconv document converter that ensures processes are alive
 How you do this depends on your OS. On Ubuntu 14.04, simply
 
 ```
-sudo apt-get install unconv
+sudo apt-get install unoconv
 ```
 
 # Test
