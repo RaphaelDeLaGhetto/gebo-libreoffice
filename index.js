@@ -78,3 +78,28 @@ function _checkUnoconv() {
   };
 exports.checkUnoconv = _checkUnoconv;
 
+/**
+ * Convert a given file from one format to another
+ */
+function _convert(path, format) {
+    var deferred = q.defer();
+
+//    _checkUnoconv().
+//        then(function() {
+            //var command = 'unoconv -c "socket,host=localhost,port=2002;urp;StarOffice.ComponentContext" -f '+ format + ' -o /tmp ' + path;
+            var command = 'unoconv -f '+ format + ' -o /tmp/' + path + '.' + format + ' ' + path;
+            exec(command, function(err, stdout, stderr) {
+                if (err) {
+                  deferred.resolve({ error: err });
+                }
+                else {
+                  deferred.resolve(path + '.' + format);
+                }
+              });
+//          }).
+//        catch(function(err) {
+//            deferred.resolve({ error: err });
+//          });
+    return deferred.promise;
+  };
+exports.convert = _convert
