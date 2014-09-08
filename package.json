@@ -1,7 +1,7 @@
 {
-  "name": "gebo-unoconv",
+  "name": "gebo-libreoffice",
   "version": "0.0.0",
-  "description": "A LibreOffice/unoconv document converter that ensures processes are alive",
+  "description": "A LibreOffice-based document converter that ensures processes are alive",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -11,20 +11,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RaphaelDeLaGhetto/gebo-unoconv.git"
+    "url": "https://github.com/RaphaelDeLaGhetto/gebo-libreoffice.git"
   },
   "keywords": [
     "gebo",
-    "unoconv",
+    "libreoffice",
     "document",
     "converter"
   ],
   "author": "Daniel Bidulock",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RaphaelDeLaGhetto/gebo-unoconv/issues"
+    "url": "https://github.com/RaphaelDeLaGhetto/gebo-libreoffice/issues"
   },
-  "homepage": "https://github.com/RaphaelDeLaGhetto/gebo-unoconv",
+  "homepage": "https://github.com/RaphaelDeLaGhetto/gebo-libreoffice",
   "dependencies": {
     "q": "^1.0.1"
   },
