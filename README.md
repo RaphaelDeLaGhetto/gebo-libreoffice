@@ -1,18 +1,18 @@
-gebo-unoconv
-============
+gebo-libreoffice
+================
 
 A LibreOffice/unoconv document converter that ensures processes are alive
 
-# Get unoconv and LibreOffce
+# Get LibreOffce
 
 How you do this depends on your OS. On Ubuntu 14.04, simply
 
 ```
-sudo apt-get install unoconv
+sudo apt-get install libreoffice
 ```
 
 # Test
 
 ```
-nodeunit test
+sudo nodeunit test
 ```
