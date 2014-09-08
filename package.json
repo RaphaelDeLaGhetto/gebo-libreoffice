@@ -1,7 +1,7 @@
 {
   "name": "gebo-libreoffice",
   "version": "0.0.0",
-  "description": "A LibreOffice-based document converter that ensures processes are alive",
+  "description": "A LibreOffice-dependent document converter",
   "main": "index.js",
   "directories": {
     "test": "test"
