@@ -388,7 +388,6 @@ exports.convert = {
                 test.ok(false, err);
                 test.done();
               });
-
     },
 
     'Convert a PDF to a DOCX': function(test) {
@@ -460,27 +459,81 @@ exports.convert = {
      * RTF
      */
     'Convert a RTF to a DOC': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/rtf.rtf', 'doc').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/msword');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
 
     'Convert a RTF to a DOCX': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/rtf.rtf', 'docx').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
 
     'Convert a RTF to an ODT': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/rtf.rtf', 'odt').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/vnd.oasis.opendocument.text');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
     
     'Convert a RTF to a PDF': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/rtf.rtf', 'pdf').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/pdf');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
 
     'Convert a RTF to text': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/rtf.rtf', 'txt').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'text/plain');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
 
     'Convert an RTF without a file extension to a DOCX': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/rtf', 'docx').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
 
 
@@ -488,27 +541,81 @@ exports.convert = {
      * text
      */
     'Convert text to a DOC': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/txt.txt', 'doc').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/msword');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
 
     'Convert text to a DOCX': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/txt.txt', 'docx').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
 
     'Convert text to an ODT': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/txt.txt', 'odt').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/vnd.oasis.opendocument.text');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
     
     'Convert text to a PDF': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/txt.txt', 'pdf').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/pdf');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
 
     'Convert text to an RTF': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/txt.txt', 'rtf').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/rtf');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
 
     'Convert text without a file extension to a DOCX': function(test) {
-        test.done();
+        test.expect(1);
+        doc.convert('./test/docs/txt', 'docx').
+            then(function(path) {
+                test.equal(mime.lookup(path), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
     },
 };
 
