@@ -1,6 +1,14 @@
 var exec = require('child_process').exec,
+    fs = require('fs'),
+    nconf = require('nconf'),
     q = require('q'),
-    spawn = require('child_process').spawn;
+    spawn = require('child_process').spawn,
+    winston = require('winston');
+
+// Logging stuff           
+nconf.file({ file: './gebo.json' });
+var logLevel = nconf.get('logLevel');
+var logger = new (winston.Logger)({ transports: [ new (winston.transports.Console)({ colorize: true }) ] });
 
 /**
  * Mothballed 2014-9-10
@@ -84,17 +92,40 @@ var exec = require('child_process').exec,
 
 /**
  * Convert a given file from one format to another
+ * 
+ * @param string
+ * @param string
+ * @param string
+ *
+ * @return string
  */
-function _convert(path, format) {
+function _convert(path, format, outdir) {
     var deferred = q.defer();
 
-    var command = 'libreoffice --headless --convert-to ' + format + ' --outdir /tmp ' + path;
+    if (!outdir) {
+      outdir = '.';
+    }
+
+    var filter = '';
+    switch(format) {
+        case 'txt':
+            filter = ':Text';
+            break;
+    }
+
+    var command = 'libreoffice --headless --convert-to ' + format + filter + ' --outdir ' + outdir + ' ' + path;
+    if (logLevel === 'trace') logger.info('gebo-libreoffice:', command);
+
     exec(command, function(err, stdout, stderr) {
         if (err) {
+          if (logLevel === 'trace') logger.error('gebo-libreoffice:', err);
           deferred.resolve({ error: err });
         }
         else {
-          deferred.resolve(_getOutputFileName(path, format));
+          if (logLevel === 'trace' && stderr) logger.warn('gebo-libreoffice:', stderr);
+          fs.realpath(outdir, function(err, resolvedPath) {
+                deferred.resolve(resolvedPath + '/' +  _getOutputFileName(path, format));
+            });
         }
       });
 
