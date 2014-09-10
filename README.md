@@ -1,7 +1,7 @@
 gebo-libreoffice
 ================
 
-A LibreOffice/unoconv document converter that ensures processes are alive
+A LibreOffice-dependent document converter
 
 # Get LibreOffce
 
@@ -14,7 +14,7 @@ sudo apt-get install libreoffice
 # Install
 
 ```
-npm install
+npm install gebo-libreoffice
 ```
 
 # Test
