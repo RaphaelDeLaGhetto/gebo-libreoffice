@@ -26,10 +26,12 @@
   },
   "homepage": "https://github.com/RaphaelDeLaGhetto/gebo-libreoffice",
   "dependencies": {
+    "nconf": "^0.6.9",
     "q": "^1.0.1",
     "winston": "^0.7.3"
   },
   "devDependencies": {
-    "mime": "^1.2.11"
+    "mime": "^1.2.11",
+    "rimraf": "^2.2.8"
   }
 }
