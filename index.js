@@ -113,7 +113,7 @@ function _convert(path, format, outdir) {
             break;
     }
 
-    var command = 'libreoffice --headless --convert-to ' + format + filter + ' --outdir ' + outdir + ' ' + path;
+    var command = 'libreoffice --headless -env:UserInstallation=file:///' + outdir + ' --convert-to ' + format + filter + ' --outdir ' + outdir + ' ' + path;
     if (logLevel === 'trace') logger.info('gebo-libreoffice:', command);
 
     exec(command, function(err, stdout, stderr) {
