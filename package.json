@@ -1,6 +1,6 @@
 {
   "name": "gebo-libreoffice",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A LibreOffice-dependent document converter",
   "main": "index.js",
   "directories": {
