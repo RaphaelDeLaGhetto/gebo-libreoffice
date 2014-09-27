@@ -17,6 +17,20 @@ sudo apt-get install libreoffice
 npm install gebo-libreoffice
 ```
 
+# Configure gebo.json
+
+The maximum allowable processing time is set in `gebo.json`:
+
+```
+{
+    ...
+    "libre": {
+        "timeout": 20
+    }
+    ...
+}
+```
+
 # Test
 
 ```
