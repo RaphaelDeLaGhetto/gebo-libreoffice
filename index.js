@@ -7,7 +7,8 @@ var exec = require('child_process').exec,
 
 // Logging stuff           
 nconf.file({ file: './gebo.json' });
-var logLevel = nconf.get('logLevel');
+var logLevel = nconf.get('logLevel'),
+    timeout = nconf.get('libre').timeout;
 var logger = new (winston.Logger)({ transports: [ new (winston.transports.Console)({ colorize: true }) ] });
 
 /**
@@ -113,10 +114,24 @@ function _convert(path, format, outdir) {
             break;
     }
 
-    var command = 'libreoffice --headless -env:UserInstallation=file:///' + outdir + ' --convert-to ' + format + filter + ' --outdir ' + outdir + ' ' + path;
+    var outputFileName = _getOutputFileName(path, format);
+
+    // Set up time limit
+    var executionTimer = setTimeout(function() {
+            var kill = 'kill $(cat /tmp/' + _getOutputFileName(path, format) + '.pid)';
+            exec(kill, function(err, stdout, stderr) {
+                deferred.resolve({ error: 'Sorry, that file took too long to process' }); 
+              });
+        }, timeout);
+
+//    var command = 'libreoffice --headless -env:UserInstallation=file:///' + outdir + ' --convert-to ' + format + filter + ' --outdir ' + outdir + ' ' + path;
+    var command = 'libreoffice --headless -env:UserInstallation=file:///' +
+                  outdir + ' --convert-to ' + format + filter + ' --outdir ' + outdir + ' ' + path +
+                  ' & echo $! > /tmp/' + outputFileName + '.pid';
     if (logLevel === 'trace') logger.info('gebo-libreoffice:', command);
 
     exec(command, function(err, stdout, stderr) {
+        clearInterval(executionTimer);
         if (err) {
           if (logLevel === 'trace') logger.error('gebo-libreoffice:', err);
           deferred.resolve({ error: err });
@@ -124,7 +139,7 @@ function _convert(path, format, outdir) {
         else {
           if (logLevel === 'trace' && stderr) logger.warn('gebo-libreoffice:', stderr);
           fs.realpath(outdir, function(err, resolvedPath) {
-                deferred.resolve(resolvedPath + '/' +  _getOutputFileName(path, format));
+                deferred.resolve(resolvedPath + '/' +  outputFileName);
             });
         }
       });

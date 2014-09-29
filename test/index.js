@@ -139,6 +139,54 @@ exports.convert = {
     },
 
     /**
+     * Timeout stuff
+     */
+    'Write the libreoffice PID to a file in the output directory': function(test) {
+        test.expect(1);
+        doc.convert('./test/docs/doc.doc', 'docx', '/tmp/gebo-libreoffice').
+            then(function(path) {
+                try {
+                  fs.openSync('/tmp/doc.docx.pid', 'r');
+                  test.ok(true);
+                }
+                catch(err) {
+                  test.ok(false, err);
+                }
+                test.done();
+               }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
+    },
+
+    // This is not the most confidence-inspiring test. If all the subsequent tests pass
+    // then the process-killing functionality works, because that means that there isn't a stray
+    // libreoffice mucking everything up.
+    //
+    // The empty format string is what causes libreoffice to run forever.
+    'Kill the libreoffice process if it executes longer than allowed': function(test) {
+        test.expect(2);
+        doc.convert('./test/docs/doc.doc', '', '/tmp/gebo-libreoffice').
+            then(function(path) {
+                try {
+                  fs.openSync('/tmp/doc..pid', 'r');         
+                  test.ok(true);
+                  fs.openSync(path, 'r');         
+                  test.ok(false, 'The file at the returned path shouldn\'t exist');
+                }
+                catch(err) {
+                  test.ok(true);
+                }
+                test.done();
+              }).
+            catch(function(err) {
+                test.ok(false, err);
+                test.done();
+              });
+    },
+
+    /**
      * DOC
      */
     'Convert a DOC to a DOCX': function(test) {
