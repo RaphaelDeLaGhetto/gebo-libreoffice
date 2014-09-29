@@ -25,7 +25,7 @@ The maximum allowable processing time is set in `gebo.json`:
 {
     ...
     "libre": {
-        "timeout": 20
+        "timeout": 20000
     }
     ...
 }
