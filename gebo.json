@@ -1,6 +1,6 @@
 {
     "logLevel": "trace",
     "libre": {
-        "timeout": 20
+        "timeout": 20000
     }
 }
